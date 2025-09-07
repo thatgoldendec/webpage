@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Declan Riley – IT Portfolio</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    body {
+      background: linear-gradient(270deg, #1a1a1a, #2c3e50, #1a1a1a);
+      background-size: 600% 600%;
+      animation: animatedBackground 30s ease infinite;
+    }
+
+    @keyframes animatedBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .fade {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+
+    .visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .intro, .certs-view, .projects-view, .videos-view {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .intro h1 {
+      font-size: 3rem;
+      margin: 0;
+      animation: fadeIn 2s ease-out forwards;
+    }
+
+    .intro h2 {
+      font-size: 1.8rem;
+      margin-top: 1rem;
+      animation: fadeInDelayed 2s ease-out forwards;
+      animation-delay: 2s;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInDelayed {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .intro-links {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      animation: fadeInBox 1.2s ease-out forwards;
+      animation-delay: 2.8s;
+      opacity: 0;
+    }
+
+    .intro-links a {
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      background-color: #00bfff;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .intro-links a:hover {
+      background-color: #0099cc;
+      transform: translateY(-2px);
+    }
+
+    @keyframes fadeInBox {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .certs-view h2,
+    .projects-view h2,
+    .videos-view h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid #444;
+      padding-bottom: 0.5rem;
+      color: #e6e6e6;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      margin-bottom: 0.6rem;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .back-button {
+      margin-top: 2rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      background-color: #00bfff;
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #0099cc;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Intro Section -->
+  <div class="intro visible" id="intro">
+    <h1>Hi, I'm Declan</h1>
+    <h2>Welcome to my IT Portfolio</h2>
+
+    <div class="intro-links">
+      <a onclick="showSection('certs')">Certifications</a>
+      <a onclick="showSection('projects')">Projects</a>
+      <a onclick="showSection('videos')">Videos</a>
+    </div>
+  </div>
+
+  <!-- Certifications Section -->
+  <div class="certs-view fade" id="certs">
+    <h2>🎓 Certifications</h2>
+    <ul>
+      <li><a href="https://www.credly.com/badges/52390ea1-89e8-44f0-859f-c9e479034ce7/public_url">CompTIA A+</a></li>
+    </ul>
+    <div class="back-button" onclick="goBack()">← Back to Menu</div>
+  </div>
+
+  <!-- Projects Section -->
+  <div class="projects-view fade" id="projects">
+    <h2>👨‍💻 Projects</h2>
+    <ul>
+      <li><strong>Home Lab</strong>
+        <ul>
+          <li><a>Active Directory Home Lab</a></li>
+        </ul>
+      </li>
+      <li><strong>Networking Projects</strong>
+        <ul>
+          <li><a href="https://medium.com/@DDr23/wake-on-lan-how-to-turn-on-your-windows-pc-with-your-phone-845c941b82c5">Wake On LAN – Power PC with Phone</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="back-button" onclick="goBack()">← Back to Menu</div>
+  </div>
+
+  <!-- Videos Section -->
+  <div class="videos-view fade" id="videos">
+    <h2>📺 YouTube Videos</h2>
+    <ul>
+      <li><a>Windows Server Home Lab Walkthrough</a></li>
+      <li><a>How to Pass the CompTIA A+ Exam</a></li>
+    </ul>
+    <div class="back-button" onclick="goBack()">← Back to Menu</div>
+  </div>
+
+  <script>
+    function showSection(sectionId) {
+      document.getElementById('intro').classList.remove('visible');
+      document.getElementById('intro').classList.add('fade');
+
+      ['certs', 'projects', 'videos'].forEach(id => {
+        const section = document.getElementById(id);
+        if (id === sectionId) {
+          section.classList.remove('fade');
+          section.classList.add('visible');
+        } else {
+          section.classList.remove('visible');
+          section.classList.add('fade');
+        }
+      });
+    }
+
+    function goBack() {
+      ['certs', 'projects', 'videos'].forEach(id => {
+        const section = document.getElementById(id);
+        section.classList.remove('visible');
+        section.classList.add('fade');
+      });
+
+      document.getElementById('intro').classList.remove('fade');
+      document.getElementById('intro').classList.add('visible');
+    }
+  </script>
+
+</body>
+</html>
