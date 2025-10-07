@@ -1,0 +1,922 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>1. Setting up Virtual Boxes</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(63, 126, 190, 1);
+	fill: rgba(63, 126, 190, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 111, 200, 0.09);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(134, 131, 126, 1);
+	fill: rgba(134, 131, 126, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(63, 126, 190, 1);
+	fill: rgba(63, 126, 190, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(232, 242, 250, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 99, 174, 0.172); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="132c119e-9176-80a0-bd7c-c737daac95f3" class="page sans"><header><h1 class="page-title">1. Setting up Virtual Boxes</h1><p class="page-description"></p></header><div class="page-body"><p id="132c119e-9176-80c2-bff1-dcc5bd322a05" class="">
+</p><p id="132c119e-9176-8056-acee-eb28d2086200" class=""><strong><span style="border-bottom:0.05em solid">🛠️ Getting Started: Preparing Your Lab Environment</span></strong><br/>Before we begin, let’s make sure everything is ready to go. You’ll need to download the following tools and ISO files</p><p id="132c119e-9176-80b7-808d-db951b633784" class=""> In my walkthrough I will be using the ISO for windows server 2022. It will ask you to register for a free trial, but do not worry you don’t have to put you’re real name In if you don’t want to. </p><p id="282c119e-9176-8012-bb3a-da1b75afab9c" class="">
+</p><hr id="132c119e-9176-8018-8b2c-f7b797d831e1"/><p id="132c119e-9176-802b-ad4f-f84b5aca53df" class="">Windows 10 Media Creation - <a href="https://www.microsoft.com/en-us/software-download/windows10">https://www.microsoft.com/en-us/software-download/windows10</a></p><p id="132c119e-9176-8044-9baf-cb29d9e9200d" class="">
+</p><p id="132c119e-9176-80ce-af20-f42e9fcdf39c" class="">Windows Server 2022 - <a href="https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022">https://www.microsoft.com/en-us/evalcenter/download-windows-server-2022</a></p><p id="282c119e-9176-80d0-8566-e38db8e40c53" class="">
+</p><p id="282c119e-9176-8098-9dbb-eb5e2991cf67" class="">VirtualBox - <a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></p><p id="282c119e-9176-801d-92e3-fa18eddb4585" class="">
+</p><p id="282c119e-9176-80d0-ab0a-e5a0a68c5eac" class="">⚠️ <strong>Important</strong>: Before downloading your ISOs, check whether your system is 64-bit or 32-bit and choose the matching version accordingly.</p><hr id="282c119e-9176-80e8-b321-c7f2ee7f7fc5"/><p id="282c119e-9176-80e3-959e-da550117dbc7" class="">
+</p><p id="282c119e-9176-8005-ae20-ee44b466665a" class="">In this walkthrough, I’ll be using the Windows Server 2022 ISO. You’ll be prompted to register for a free trial — feel free to use placeholder details if preferred.</p><p id="282c119e-9176-80cf-a6fc-e9ac92723dee" class="">Once downloaded, place both ISO files into a shared folder, with separate subfolders for <strong>Windows 10</strong> and <strong>Windows Server</strong>. This will make them easier to locate later in the tutorial. </p><p id="282c119e-9176-800f-87db-f95802886001" class="">
+</p><hr id="282c119e-9176-804a-ae45-fc2cf43f0cd0"/><h1 id="132c119e-9176-80d1-8a63-e62df5599ef2" class=""><span style="border-bottom:0.05em solid">Setup of Windows 10 Machine</span></h1><div id="14ec119e-9176-804c-91c6-fcd1030dd23d" class="column-list"><div id="14ec119e-9176-8016-8e8f-fc92f6bd0b58" style="width:93.75%" class="column"><ol type="1" id="14ec119e-9176-8045-8988-f68d6dcddfbc" class="numbered-list" start="1"><li>Once we have got the windows 10 ISO from the media creation tool, first begin by opening Virtual Box and select new on the machine tab as shown below.</li></ol><figure id="132c119e-9176-80ad-9526-d3da6816fdde" class="image"><a href="image.png"><img style="width:432px" src="image.png"/></a></figure><p id="283c119e-9176-80e3-941e-e77065cb0585" class="">
+</p><hr id="283c119e-9176-802a-a3f4-d67416783605"/><p id="283c119e-9176-80f6-98ca-d62e1281ba73" class="">
+</p><ol type="1" id="14ec119e-9176-80f1-8ce8-c998cfaab8c8" class="numbered-list" start="2"><li>On the first page we will name our client machine something simple like win10, windows 10 for short which I’ve done. Next we then select the folder we created that we stored our ISO’s in for our machines, then on the ISO image select the path where we have stored our Windows 10 ISO. If done correctly the windows version, 32 or 64bit should automatically select.</li></ol><figure id="132c119e-9176-80c8-a444-efe9a40176c3" class="image"><a href="image%201.png"><img style="width:455.984375px" src="image%201.png"/></a></figure><hr id="203c119e-9176-80f9-936f-d22fd10bd655"/><p id="203c119e-9176-8059-bd6a-ea34c3baab2a" class="">
+</p><ol type="1" id="14ec119e-9176-802f-b296-e139258db2d7" class="numbered-list" start="3"><li>Next we set how much memory we will allocate to the Windows 10 machine. You want to make sure you have enough memory to allocate, with 2GB of RAM <strong><span style="border-bottom:0.05em solid">(2048 mb)</span></strong><strong> </strong>being more than enough to run. In my example I have set to around 6GB <strong>(6192 mb) </strong>as I have enough memory to spare.</li></ol><figure id="132c119e-9176-806f-a938-caa4433ded52" class="image"><a href="image%202.png"><img style="width:455.984375px" src="image%202.png"/></a></figure><p id="203c119e-9176-8008-9829-dd4c9dcf1939" class="">
+</p><hr id="203c119e-9176-80b1-97b3-e366ba7526fb"/><p id="203c119e-9176-80ab-b4a7-f910132d9120" class="">
+</p><ol type="1" id="14ec119e-9176-80fa-8bed-eadc2bc4a44c" class="numbered-list" start="4"><li>Now for the final section Hard Disk, this is where we will set the amount of storage we will allocate to this machine. I have set mines to have 30GB which is suitable for what we will be using it for. Once we have set the file path to where we will save the storage for our Windows 10 machine, and how much storage we will allocate to the machine we can go ahead and click finish.</li></ol><figure id="147c119e-9176-8000-818b-c8464410d9ef" class="image"><a href="image%203.png"><img style="width:707.984375px" src="image%203.png"/></a></figure><figure id="132c119e-9176-8010-8905-db0c40d21c9b" class="image"><a href="image%204.png"><img style="width:455.984375px" src="image%204.png"/></a></figure><p id="259c119e-9176-80ef-b654-f2d89a455daa" class="">
+</p><hr id="14ec119e-9176-802d-b026-d9f214667d11"/><p id="259c119e-9176-8038-9c15-e85890ed54c2" class="">
+</p></div><div id="14ec119e-9176-8056-a03c-fd0b787ef0bb" style="width:6.25%" class="column"><p id="132c119e-9176-80ab-b038-e658d8a67783" class=""> </p><p id="14ec119e-9176-8058-9358-e5aab2cef50f" class="">
+</p><p id="14ec119e-9176-8041-a3b9-f14ee9915ae3" class="">
+</p><p id="14ec119e-9176-807f-a7d7-f9f8fb93f926" class="">
+</p><p id="14ec119e-9176-80ae-ab95-e56210406457" class="">
+</p><p id="14ec119e-9176-8011-9c90-f23c80c17872" class="">
+</p><p id="14ec119e-9176-80d0-8249-c47e3743439d" class="">
+</p><p id="14ec119e-9176-80ad-8af0-e2c538d018ea" class="">
+</p><p id="14ec119e-9176-80d2-b8c6-e3d0992f807e" class="">
+</p><p id="14ec119e-9176-8017-837d-f5b7c38bcf1c" class="">
+</p><p id="14ec119e-9176-80d6-8382-d2992f93d879" class="">
+</p><p id="14ec119e-9176-802d-ae0b-c4fb11dca16c" class="">
+</p><p id="14ec119e-9176-80e8-a032-cbc844344e73" class="">
+</p><p id="14ec119e-9176-80c5-8dc6-d85301286770" class="">
+</p><p id="14ec119e-9176-8060-b661-d06eb1087fd3" class="">
+</p><p id="14ec119e-9176-8071-be5e-ff8754f93f32" class="">
+</p><p id="14ec119e-9176-805e-9b80-e23d8539fe6e" class="">
+</p><p id="14ec119e-9176-80db-8e84-dde3b759c9f3" class="">
+</p><p id="14ec119e-9176-8026-ae57-e61f9c3a5c16" class="">
+</p><p id="14ec119e-9176-805d-9458-c3611d2a87e3" class="">
+</p><p id="14ec119e-9176-803b-91f1-f71cd9b866f9" class="">
+</p><p id="14ec119e-9176-8091-9e6a-f7c1393495c0" class="">
+</p><p id="14ec119e-9176-8041-af39-cfac0c3d406a" class="">
+</p><p id="14ec119e-9176-805a-ae55-e44642a39c72" class="">
+</p><p id="14ec119e-9176-8000-83e5-d18fa53b0e40" class="">
+</p><p id="14ec119e-9176-8066-a1cb-e6e4358e20aa" class="">
+</p><p id="14ec119e-9176-8038-acee-dbde6e635905" class="">
+</p><p id="14ec119e-9176-8029-80c2-c53cc091a86e" class="">
+</p><p id="14ec119e-9176-80f1-8fb6-e9b30b733532" class="">
+</p><p id="14ec119e-9176-808d-a7c0-fdf41fd38a6f" class="">
+</p><p id="14ec119e-9176-80af-8dee-d98db55b6fd3" class="">
+</p><p id="14ec119e-9176-8069-a211-f191740cc78d" class="">
+</p><p id="14ec119e-9176-800a-ba05-dfca732d67ec" class="">
+</p><p id="14ec119e-9176-805f-a0a1-e9108a12c4e7" class="">
+</p><p id="14ec119e-9176-80e3-b9fd-e90cf4c731c2" class="">
+</p><p id="14ec119e-9176-8083-bcbe-c065c8ea0a35" class="">
+</p><p id="14ec119e-9176-8056-ac0a-d18c9269e130" class="">
+</p><p id="14ec119e-9176-801f-b045-ef04cd455055" class="">
+</p><p id="14ec119e-9176-8091-9dd2-c79bf3a1b481" class="">
+</p><p id="14ec119e-9176-80ee-9526-ca16d34bd326" class="">
+</p><p id="14ec119e-9176-8039-aae0-e17a0d8358e9" class="">
+</p><p id="14ec119e-9176-80c8-a832-f82e7fd686ba" class="">
+</p><p id="14ec119e-9176-80a0-ba37-e96e3fee678d" class="">
+</p><p id="14ec119e-9176-8078-a0a3-f68b6c6dcfdc" class="">
+</p></div></div><p id="147c119e-9176-805a-a643-c6f655d31af3" class="">Once we have set the above settings and continue if done correctly another window should pop up that is the Windows 10 virtual machine booting up.</p><p id="132c119e-9176-80b0-a57d-c3da351c7603" class="">
+</p><h1 id="132c119e-9176-8058-ab72-c30c5bcb6665" class=""><strong><span style="border-bottom:0.05em solid">Troubleshooting the boot order </span></strong></h1><p id="132c119e-9176-80f6-8f6c-e61b5e3ab7b0" class=""><em>In the setup process you might run into the following below. Don’t worry, if so you can follow the below screenshots to resolve the product key issue</em></p><figure id="132c119e-9176-8031-b4f2-c516494fb5df" class="image" style="text-align:left"><a href="image%205.png"><img style="width:624px" src="image%205.png"/></a></figure><div id="14ec119e-9176-8047-be7c-c7be242972f1" class="column-list"><div id="14ec119e-9176-80b9-9ba9-ce23a53e571a" style="width:87.5%" class="column"><p id="14ec119e-9176-800b-9489-d984ece7eff5" class=""><strong><span style="border-bottom:0.05em solid">Boot order walkthrough</span></strong></p><ol type="1" id="14ec119e-9176-8002-b3bc-de0a4a1cbbff" class="numbered-list" start="1"><li>First go into Virtual Box and select on the windows 10 machine the settings, and go into the system tab.</li></ol><figure id="14ec119e-9176-8070-988a-f416cc57e658" class="image"><a href="image%206.png"><img style="width:455.984375px" src="image%206.png"/></a></figure><p id="14ec119e-9176-8067-aa82-ea20d556e3dc" class="">Here you will find the boot order for this machine.</p><figure id="132c119e-9176-8095-892f-e0d3e36ebb63" class="image"><a href="image%207.png"><img style="width:455.984375px" src="image%207.png"/></a></figure></div><div id="14ec119e-9176-8033-bccf-c028b5a0f0b8" style="width:12.500000000000005%" class="column"><p id="14ec119e-9176-801b-8d01-f812f8b89f3b" class="">
+</p><p id="14ec119e-9176-80ac-8388-e633a6c85278" class="">
+</p><p id="14ec119e-9176-80e3-81f1-d82631389a56" class="">
+</p><p id="14ec119e-9176-80bd-8f5d-f93f976371cb" class="">
+</p><p id="14ec119e-9176-806f-9fbd-f189a49054df" class="">
+</p><p id="14ec119e-9176-8022-8c06-daf6a68c6575" class="">
+</p><p id="14fc119e-9176-808d-83bf-c68d8039352a" class="">
+</p><p id="14fc119e-9176-80b8-8ef5-f49fd55a6e2e" class="">
+</p><p id="14fc119e-9176-80c7-8f2b-f49e78466d3a" class="">
+</p><p id="14fc119e-9176-80b0-8f20-d7a358d07cd6" class="">
+</p><p id="14fc119e-9176-80cb-b02a-c488037e2767" class="">
+</p><p id="14fc119e-9176-80cc-a2e1-d6a18aaaf562" class="">
+</p><p id="14fc119e-9176-8049-84c6-fe1042a20d14" class="">
+</p></div></div><div id="14ec119e-9176-8049-a507-f96b7ff6748f" class="column-list"><div id="14ec119e-9176-8079-9809-cc40f1020a0b" style="width:87.5%" class="column"><ol type="1" id="14ec119e-9176-80d8-9f18-d8077178a793" class="numbered-list" start="2"><li>Simply go ahead and deselect floppy disk inside boot order like so, as by no surprise we are not trying to boot off floppy.</li></ol><figure id="132c119e-9176-8013-952f-c507e063bb38" class="image"><a href="image%208.png"><img style="width:455.96875px" src="image%208.png"/></a></figure></div><div id="14ec119e-9176-80e5-bfe3-cf584c87f00d" style="width:12.499999999999996%" class="column"><p id="14ec119e-9176-80b1-90d4-c9f760a39c9d" class="">
+</p><p id="14ec119e-9176-808e-852c-e32649383159" class="">
+</p><p id="14ec119e-9176-80bf-afb2-cd99593edaa7" class="">
+</p><p id="14ec119e-9176-80f4-85bb-ffe2a3fd1ce1" class="">
+</p><p id="14ec119e-9176-8005-b426-c41108bbf743" class="">
+</p></div></div><div id="14ec119e-9176-80ef-9781-cd986261fc5c" class="column-list"><div id="14ec119e-9176-8033-8536-e4fd0d52532b" style="width:93.75%" class="column"><ol type="1" id="14ec119e-9176-805f-8677-d5593cde4a3d" class="numbered-list" start="3"><li>Then go inside the storage tab, and remove the floppy attachment like so. This will stop the machine from trying to boot from floppy attachment.</li></ol><figure id="132c119e-9176-8063-9a95-d2fe02d455cd" class="image"><a href="image%209.png"><img style="width:455.984375px" src="image%209.png"/></a></figure></div><div id="14ec119e-9176-80c6-ac70-e54273b1784a" style="width:6.25%" class="column"><p id="14ec119e-9176-80c6-b81d-c92867741093" class="">
+</p><p id="14ec119e-9176-80a9-8b5e-f1327e17b38f" class="">
+</p><p id="14ec119e-9176-8031-b8d6-d227b582d70a" class="">
+</p><p id="14ec119e-9176-80ef-b377-dbf013e23ecf" class="">
+</p><p id="14ec119e-9176-80f8-9029-c4c575d7c56b" class="">
+</p></div></div><p id="147c119e-9176-8098-b513-e305ed75a3c1" class="">
+</p><hr id="147c119e-9176-805c-84d7-f375bb896cc6"/><p id="283c119e-9176-8038-a14c-c00c9cc83679" class="">
+</p><h1 id="132c119e-9176-8084-b529-d62c5e4f0e66" class=""><strong><span style="border-bottom:0.05em solid">Windows 10 Pro setup</span></strong></h1><p id="132c119e-9176-8077-a76e-faa171e169a5" class="">Once you have got here make sure the select the appropriate settings for you’re region, and language. </p><p id="14ec119e-9176-80c9-811a-e31d5d001936" class="">
+</p><div id="14ec119e-9176-80ea-8df7-db1788c45c24" class="column-list"><div id="14ec119e-9176-80ac-9375-c9888c465050" style="width:93.75%" class="column"><ol type="1" id="132c119e-9176-8052-8b79-fdd010a504dd" class="numbered-list" start="1"><li>When selecting operating systems I picked windows 10 pro instead home as we will want to add this machine to our Windows server domain.</li></ol><figure id="132c119e-9176-8078-909e-dbe152ed83f2" class="image" style="text-align:left"><a href="image%2010.png"><img style="width:432px" src="image%2010.png"/></a></figure><p id="283c119e-9176-80e3-af83-e9c40cb1d887" class="">
+</p><hr id="283c119e-9176-80db-83ff-f485572ac81f"/><p id="283c119e-9176-8084-ae05-c6e75de4f543" class="">
+</p><ol type="1" id="14ec119e-9176-80f1-a84c-e62651486e0e" class="numbered-list" start="2"><li>Next we will select the storage partition we allocated to our windows 10 machine. Make sure to format it if need be, then go ahead select it, and click next to begin installing the OS onto it.</li></ol><figure id="132c119e-9176-80eb-8fc3-c78022d1a406" class="image"><a href="image%2011.png"><img style="width:455.984375px" src="image%2011.png"/></a></figure><p id="14ec119e-9176-8006-b5ea-e565142b4f68" class="">Now it will begin installing windows on our allocated partition.</p><figure id="132c119e-9176-80e1-b0ef-d539a5822a61" class="image"><a href="image%2012.png"><img style="width:455.96875px" src="image%2012.png"/></a></figure><p id="283c119e-9176-8022-b44b-c7d72185d76f" class="">
+</p><hr id="283c119e-9176-807e-8446-c999d82fb9e2"/><p id="283c119e-9176-8006-9176-c33448557530" class="">
+</p><ol type="1" id="14ec119e-9176-80c1-a21e-d88666a5ef85" class="numbered-list" start="3"><li>Once installing of windows is done we will go through the basic setup before we get to the desktop experience. Select which region you are in.</li></ol><figure id="132c119e-9176-809c-bc1a-c54d6b61038b" class="image"><a href="image%2013.png"><img style="width:708px" src="image%2013.png"/></a></figure><p id="283c119e-9176-802f-97ef-c6500c379d95" class="">
+</p><hr id="283c119e-9176-8022-8626-ddad720d08b3"/><p id="283c119e-9176-8054-bf4f-c595e2fe6442" class="">
+</p><ol type="1" id="14ec119e-9176-80e8-8b07-c0d9c4a255de" class="numbered-list" start="4"><li>Since we are going to join our windows 10 machine to a domain being our Windows server machine we will go ahead and select Set up for an organisation.</li></ol><figure id="132c119e-9176-80e9-8820-fabd3793d4e4" class="image"><a href="image%2014.png"><img style="width:708px" src="image%2014.png"/></a></figure><p id="283c119e-9176-8051-a40c-c89ef517c783" class="">
+</p><hr id="283c119e-9176-805f-b10f-c6464ea31585"/><p id="283c119e-9176-80bf-a1c4-c32806c7167e" class="">
+</p><ol type="1" id="132c119e-9176-8053-80b2-e21a1b04858c" class="numbered-list" start="5"><li>On the sign in page click down on the bottom left Domain join instead.</li></ol><figure id="132c119e-9176-8095-a4ac-f60debbd24c6" class="image"><a href="image%2015.png"><img style="width:455.984375px" src="image%2015.png"/></a></figure><p id="283c119e-9176-80f3-902e-fb53b06cda31" class="">
+</p><hr id="283c119e-9176-8086-ac90-cc06c7877375"/><p id="283c119e-9176-8033-8ce0-c5d2e6ad6ece" class="">
+</p><ol type="1" id="14ec119e-9176-807c-8ddb-f48e837fb456" class="numbered-list" start="6"><li>Go ahead and set the name to something generic like user. For password to save time just leave it empty. On the service options after this just click no, and skip them to save time as we are only using this machine to join the domain for practice.</li></ol><figure id="132c119e-9176-8072-b1cc-d4ca945be0c7" class="image"><a href="image%2016.png"><img style="width:432px" src="image%2016.png"/></a></figure><p id="283c119e-9176-80f5-a43a-ff34b9b5d9a8" class="">
+</p><hr id="283c119e-9176-800e-a63d-f7b700070ade"/><p id="283c119e-9176-8043-b304-f725acf6d9a9" class="">
+</p><ol type="1" id="14ec119e-9176-808e-8d94-c8a54cc01088" class="numbered-list" start="7"><li>Once you have fired through all the service options it will begin the setup process before we get to the login screen for windows.</li></ol><figure id="132c119e-9176-8025-bfe3-fa9b18605286" class="image"><a href="image%2017.png"><img style="width:455.96875px" src="image%2017.png"/></a></figure><ol type="1" id="14ec119e-9176-80e0-9e83-f95cd9bd1993" class="numbered-list" start="8"><li>Once we reach the login screen we can simply login without a password, and now we have successfully setup windows 10 virtual machine.</li></ol><figure id="132c119e-9176-8046-b0e9-eaf6bbec094b" class="image"><a href="image%2018.png"><img style="width:455.984375px" src="image%2018.png"/></a></figure><p id="14ec119e-9176-80e8-ae59-fa61e6581ae9" class="">
+</p></div><div id="14ec119e-9176-8010-9d5a-e5440d2cbf06" style="width:6.25%" class="column"><p id="14ec119e-9176-80fc-b995-c5565cad90b1" class="">
+</p><p id="14ec119e-9176-8071-ab83-d4ec8c46c092" class="">
+</p><p id="14ec119e-9176-80fb-b468-fe57afc817ac" class="">
+</p><p id="14ec119e-9176-8047-a49a-dac50563c6f9" class="">
+</p><p id="14ec119e-9176-80fc-86d2-f98196742a5a" class="">
+</p><p id="14ec119e-9176-8040-aac7-ec6f9542928e" class="">
+</p><p id="14ec119e-9176-80c7-9ee9-d3d6c546c127" class="">
+</p><p id="14ec119e-9176-8025-a37d-fe3b2f0efa90" class="">
+</p><p id="14ec119e-9176-80b6-ac3d-efb73be1ba1d" class="">
+</p><p id="14ec119e-9176-8005-96e0-e4cae7107737" class="">
+</p><p id="14ec119e-9176-80ef-acc9-f807a8436142" class="">
+</p><p id="14ec119e-9176-8096-a00d-fb779cdac113" class="">
+</p><p id="14ec119e-9176-800e-9f98-c6c7bd799d8b" class="">
+</p><p id="14ec119e-9176-802e-8966-d8aa68e23bc5" class="">
+</p><p id="14ec119e-9176-80cd-a40a-f601bd43dce2" class="">
+</p><p id="14ec119e-9176-8087-aa8d-e4ef82d7e316" class="">
+</p><p id="14ec119e-9176-808a-8fd6-f4c37ab74822" class="">
+</p><p id="14ec119e-9176-803d-8ce4-d68ef6b9ad5f" class="">
+</p><p id="14ec119e-9176-8088-a60a-fb8d7518d4c0" class="">
+</p><p id="14ec119e-9176-80dc-adda-ca8a8056e0a9" class="">
+</p><p id="14ec119e-9176-8084-a3b5-de5d9c2e3018" class="">
+</p><p id="14ec119e-9176-80dd-b07a-e832f5a98b14" class="">
+</p><p id="14ec119e-9176-8025-914e-c16ae9f61dfa" class="">
+</p><p id="14ec119e-9176-8017-8602-fda4c14b2d19" class="">
+</p><p id="14ec119e-9176-80d0-a4f7-fc8afce3831d" class="">
+</p><p id="14ec119e-9176-80fe-95f3-fef1b15448ac" class="">
+</p><p id="14ec119e-9176-803a-b3ec-d9681abf986f" class="">
+</p><p id="14ec119e-9176-8012-8da5-f52bbf328387" class="">
+</p><p id="14ec119e-9176-80f0-aae0-d115f320a2aa" class="">
+</p><p id="14ec119e-9176-8026-aecd-d33433617bc0" class="">
+</p><p id="14ec119e-9176-8058-b848-de107dcd72c0" class="">
+</p><p id="14ec119e-9176-8027-b851-d134b53acfc3" class="">
+</p><p id="14ec119e-9176-805d-b775-d432c6982227" class="">
+</p><p id="14ec119e-9176-80b6-896f-e7724b1b07ab" class="">
+</p><p id="14ec119e-9176-806b-adf8-d93f3a3c6dea" class="">
+</p><p id="14ec119e-9176-8082-ae0a-df5460db9863" class="">
+</p><p id="14ec119e-9176-80bd-bbd6-cfd5b33d92ae" class="">
+</p><p id="14ec119e-9176-80ec-9a1e-c28e63349705" class="">
+</p><p id="14ec119e-9176-800e-aaf7-d25e8868f9db" class="">
+</p><p id="14ec119e-9176-8027-ba54-c03facf4fbb4" class="">
+</p><p id="14ec119e-9176-8074-8f2e-c13ce6ca54e5" class="">
+</p><p id="14ec119e-9176-8070-9516-e04a64d17ff5" class="">
+</p><p id="14ec119e-9176-805e-8d00-e286ea5966b3" class="">
+</p><p id="14ec119e-9176-8058-91af-f5ed6b0012ef" class="">
+</p><p id="14ec119e-9176-80dc-85d2-c24ac2fe2977" class="">
+</p><p id="14ec119e-9176-802c-a2e5-f759460bbce9" class="">
+</p><p id="14ec119e-9176-8077-b22d-f61efd27f12f" class="">
+</p><p id="14ec119e-9176-8058-8829-de1c205b8f4f" class="">
+</p><p id="14ec119e-9176-8036-9ec3-f47126d7c81b" class="">
+</p><p id="14ec119e-9176-8029-9842-f538956ca7e5" class="">
+</p><p id="14ec119e-9176-8005-9822-c56172b90c7b" class="">
+</p><p id="14ec119e-9176-8056-8426-f6af8b4381be" class="">
+</p><p id="14ec119e-9176-809c-b359-cd3df75d0c28" class="">
+</p><p id="14ec119e-9176-800b-89f2-dada782d1e2f" class="">
+</p><p id="14ec119e-9176-8001-8741-d202004cd700" class="">
+</p><p id="14ec119e-9176-809c-9a83-e50dd389f9aa" class="">
+</p><p id="14ec119e-9176-8081-bc6d-d059902da295" class="">
+</p><p id="14ec119e-9176-804a-bb79-dc45d580cbcf" class="">
+</p><p id="14ec119e-9176-8065-92dc-f5660336146a" class="">
+</p><p id="14ec119e-9176-8094-be3a-f44136fb6cfb" class="">
+</p><p id="14ec119e-9176-80c3-ae38-ccb0533535e2" class="">
+</p><p id="14ec119e-9176-80ad-b037-ef08047df34c" class="">
+</p><p id="14ec119e-9176-80c6-9c2a-fb0c3188c0d6" class="">
+</p><p id="14ec119e-9176-8014-a571-fc5a6752188e" class="">
+</p><p id="14ec119e-9176-805e-a567-c6374b440820" class="">
+</p><p id="14ec119e-9176-8099-8aab-f9949dabbae4" class="">
+</p><p id="14ec119e-9176-80fd-aa64-da9f1ad3ffbb" class="">
+</p><p id="14ec119e-9176-8092-83d6-ec8b8950dab1" class="">
+</p><p id="14ec119e-9176-8003-b539-e474ee052d74" class="">
+</p><p id="14ec119e-9176-80aa-bb69-e5cbd0abf76e" class="">
+</p><p id="14ec119e-9176-80da-9ae7-ffdf5947d9b6" class="">
+</p><p id="14ec119e-9176-80df-9361-ee6adfa6d25e" class="">
+</p><p id="14ec119e-9176-8086-ab5e-cb7d2a72a675" class="">
+</p><p id="14ec119e-9176-80d6-8567-f1493e8f9132" class="">
+</p><p id="14ec119e-9176-8067-aa49-f9100fea5d64" class="">
+</p><p id="14ec119e-9176-80f1-9854-e0b9c20f2850" class="">
+</p><p id="14ec119e-9176-805a-97db-c2c6473fac24" class="">
+</p><p id="14ec119e-9176-801f-85c0-c92e3c1025ea" class="">
+</p><p id="14ec119e-9176-8056-b8f6-d1719218c0ca" class="">
+</p><p id="14ec119e-9176-8073-93fa-f65706b8687c" class="">
+</p><p id="14ec119e-9176-80b0-a740-fbf8e512336c" class="">
+</p><p id="14ec119e-9176-80bb-b157-c3ac2b8b11f7" class="">
+</p><p id="14ec119e-9176-806a-b6b4-edbebb963afd" class="">
+</p><p id="14ec119e-9176-800b-9328-f7403101a82f" class="">
+</p><p id="14ec119e-9176-80c1-b6be-f67156212026" class="">
+</p><p id="14ec119e-9176-80d3-a19f-ee6815d7b43e" class="">
+</p><p id="14ec119e-9176-8003-83df-d385d357c60a" class="">
+</p><p id="14ec119e-9176-80b6-8bdf-f3f0b86befbe" class="">
+</p><p id="14ec119e-9176-803a-b490-deccd5e6e499" class="">
+</p><p id="14ec119e-9176-80c8-8dd4-ce6237d42df4" class="">
+</p><p id="14ec119e-9176-801c-b1ba-ff339097abc3" class="">
+</p><p id="14ec119e-9176-80b8-9c84-c5b0bad66b5b" class="">
+</p><p id="14ec119e-9176-8063-ae15-d43b22f0423f" class="">
+</p><p id="14ec119e-9176-807e-a705-d89d1af0ac4b" class="">
+</p><p id="14ec119e-9176-80ca-ae1c-d48e06cae2af" class="">
+</p><p id="14ec119e-9176-80c8-a96d-cc9bf9bbe1d8" class="">
+</p><p id="14ec119e-9176-80ea-aad5-d8f792e393a4" class="">
+</p><p id="14ec119e-9176-80df-89a4-ff594c781ebb" class="">
+</p><p id="14ec119e-9176-80e5-a022-de0cd5aac840" class="">
+</p><p id="14ec119e-9176-80ea-a163-ea4abe71af6d" class="">
+</p><p id="14ec119e-9176-80b2-a682-d2198b0d8379" class="">
+</p><p id="14ec119e-9176-80ce-9ae2-d37c1020f794" class="">
+</p><p id="14ec119e-9176-8066-bcf0-d8ecd7c04178" class="">
+</p><p id="14ec119e-9176-806d-8cc3-c81d10dfb696" class="">
+</p></div></div><hr id="14ec119e-9176-808b-9694-dade75ed8c73"/><h1 id="132c119e-9176-807a-8d68-e016091cc005" class=""><strong><span style="border-bottom:0.05em solid">Setup of Windows Server 2022 Machine with VHD (Virtual Hard Disc)</span></strong></h1><p id="132c119e-9176-80a0-8c9e-fba491befe5e" class="">
+</p><div id="14ec119e-9176-80be-b52b-c5e7b1af4b30" class="column-list"><div id="14ec119e-9176-803a-84eb-e44d0583bdc3" style="width:93.75%" class="column"><ol type="1" id="132c119e-9176-80a6-8d9d-e994db4a414f" class="numbered-list" start="1"><li>Start of and click on new to begin in setting up a new machine.</li></ol><figure id="144c119e-9176-80f0-9fe3-c84926fcf457" class="image"><a href="image%2019.png"><img style="width:720px" src="image%2019.png"/></a></figure></div><div id="14ec119e-9176-8077-8279-f3952f94b16a" style="width:6.25%" class="column"><p id="14ec119e-9176-8044-8f83-e98a5e70b50e" class="">
+</p><p id="14ec119e-9176-8019-ac73-f52bcc37516f" class="">
+</p><p id="14ec119e-9176-80ba-9633-ee979c9b71b4" class="">
+</p><p id="14ec119e-9176-8057-ab49-e22f0ec1aeac" class="">
+</p></div></div><hr id="25cc119e-9176-80bd-9744-f3a34ac8ae32"/><ol type="1" id="144c119e-9176-806e-8fbc-dbb954dd5a55" class="numbered-list" start="2"><li>On this window select expert mode </li></ol><figure id="25cc119e-9176-809d-ba2a-d18113f4dacb" class="image"><a href="image%2020.png"><img style="width:617.98291015625px" src="image%2020.png"/></a></figure><p id="132c119e-9176-808a-b5a6-fb333ad05901" class=""> ————————————————————————————————————————————</p><ol type="1" id="144c119e-9176-80ec-ac75-e2b899f62f8d" class="numbered-list" start="3"><li>In this step, input a name for this machine, I called my server machine <code>winserver22</code>, allocate 8000 MB of RAM if you can. And select Create a virtual hard disk now like before for the Windows Pro machine.</li></ol><figure id="25cc119e-9176-8064-bddd-d4e15e98c1aa" class="image"><a href="image%2021.png"><img style="width:569.9857788085938px" src="image%2021.png"/></a></figure><p id="259c119e-9176-80de-b1e4-c0ef534cf958" class="">
+</p><hr id="144c119e-9176-80bc-b02c-ef916572f62a"/><p id="25cc119e-9176-8025-bd26-e9d4ea32f12c" class="">
+</p><ol type="1" id="25cc119e-9176-80a2-a5a8-f838963a6a55" class="numbered-list" start="4"><li>Now we have created the machine for Windows Server 2022 go ahead and select it, then go into settings for this machine.</li></ol><figure id="25cc119e-9176-809e-bfe0-c517597c2808" class="image"><a href="image%2022.png"><img style="width:709.984375px" src="image%2022.png"/></a></figure><hr id="147c119e-9176-80fe-9e4c-d12237ab78c8"/><p id="25cc119e-9176-801b-bc10-dddc49196912" class="">
+</p><ol type="1" id="25cc119e-9176-80b8-95e9-ec595582a44f" class="numbered-list" start="5"><li>Now go to storage then select the optical drive on the SATA Controller, and on the right hand sign with the drop that has the optical drive select choose a disc file, and find the ISO for Windows Server you have installed.</li></ol><figure id="25cc119e-9176-8054-bfbd-d367b48bf4d2" class="image"><a href="image%2023.png"><img style="width:709.984375px" src="image%2023.png"/></a></figure><p id="285c119e-9176-8059-95b7-c7cf638984d3" class="">
+</p><hr id="285c119e-9176-8005-a542-f576fe2f6d6e"/><p id="285c119e-9176-8033-a16a-f2832b03352f" class="">
+</p><p id="25cc119e-9176-80ec-8f68-ebc1cf82a1ec" class="">If done correctly the optical drive should be look something like this. If so go ahead and start the Windows Server Machine.</p><figure id="25cc119e-9176-80a6-b638-cf1a56056d14" class="image"><a href="image%2024.png"><img style="width:652.98291015625px" src="image%2024.png"/></a></figure><p id="25cc119e-9176-807d-97ea-f500f0dbbfd1" class="">
+</p><hr id="25cc119e-9176-80bb-a88a-f064d1ccc6eb"/><h2 id="25cc119e-9176-80fc-becf-fafb2b597435" class="">Windows Server Setup Process</h2><figure id="147c119e-9176-804d-8f50-ddfd81c32dda" class="image"><a href="image%2025.png"><img style="width:707.984375px" src="image%2025.png"/></a></figure><p id="147c119e-9176-805d-b999-d827e2fcce0f" class="">If done correctly the Windows server machine should load up, and get to a screen similar to this if the VHD was mounted to the VM correctly. Now just go through the setup process and make changes relevant to you’re location etc.</p><figure id="147c119e-9176-80a9-b519-edd9528e6539" class="image"><a href="image%2026.png"><img style="width:707.984375px" src="image%2026.png"/></a></figure><p id="147c119e-9176-80d9-87cd-d2ce1da8aff8" class="">
+</p><p id="147c119e-9176-80da-8807-f0f808f5164f" class=""><strong><span style="border-bottom:0.05em solid">Admin Password</span></strong></p><figure id="147c119e-9176-80fc-a094-c215a63fbf91" class="image"><a href="image%2027.png"><img style="width:707.984375px" src="image%2027.png"/></a></figure><p id="147c119e-9176-80c5-8ac2-d497680e2390" class="">For the admin password you need to make it something strong</p><p id="147c119e-9176-80b9-824d-cb005ca06c2e" class="">I just used - <strong>P@ssword123</strong></p><p id="147c119e-9176-807a-8c5f-f1a2d1fca819" class="">
+</p><figure id="147c119e-9176-8067-9e62-c84db97846a4" class="image"><a href="image%2028.png"><img style="width:707.96875px" src="image%2028.png"/></a></figure><p id="147c119e-9176-8050-baf3-fd3036dea720" class="">
+</p><figure id="147c119e-9176-80a4-b8d9-ccec5634c00f" class="image"><a href="image%2029.png"><img style="width:707.984375px" src="image%2029.png"/></a></figure><p id="147c119e-9176-805f-a1c3-fd7a374f348d" class="">
+</p><figure id="147c119e-9176-803c-9c5b-c2d439e17649" class="image"><a href="image%2030.png"><img style="width:707.984375px" src="image%2030.png"/></a></figure><p id="147c119e-9176-80e9-b082-e15485a3a604" class="">Nice, we now have our Windows server machine, and the client Windows 10 machine ready to setup.</p><p id="147c119e-9176-8007-9b34-f79cb7c53c39" class=""><a href="2%20Naming%20The%20Server%20and%20Installing%20Active%20Director%20147c119e917680b69c97f098d91faa27.html">2. Naming The Server and Installing Active Directory</a> </p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
