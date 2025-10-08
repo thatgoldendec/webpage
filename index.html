@@ -195,38 +195,39 @@
 
   <!-- Videos Section -->
 
-  <script>
-    function showSection(sectionId) {
-      document.getElementById('intro').classList.remove('visible');
-      document.getElementById('intro').classList.add('fade');
+<script>
+  function showSection(sectionId) {
+    document.getElementById('intro').classList.remove('visible');
+    document.getElementById('intro').classList.add('fade');
 
-      ['certs', 'projects'].forEach(id => {
-        const section = document.getElementById(id);
-        if (id === sectionId) {
-          section.classList.remove('fade');
-          section.classList.add('visible');
-        } else {
-          section.classList.remove('visible');
-          section.classList.add('fade');
-        }
-      });
-    }
-
-    function goBack() {
-      ['certs', 'projects', 'videos'].forEach(id => {
-        const section = document.getElementById(id);
+    ['certs', 'projects'].forEach(id => {
+      const section = document.getElementById(id);
+      if (id === sectionId) {
+        section.classList.remove('fade');
+        section.classList.add('visible');
+      } else {
         section.classList.remove('visible');
         section.classList.add('fade');
-      });
+      }
+    });
+  }
 
-      document.getElementById('intro').classList.remove('fade');
-      document.getElementById('intro').classList.add('visible');
-    }
-  </script>
+  function goBack() {
+    ['certs', 'projects'].forEach(id => {
+      const section = document.getElementById(id);
+      section.classList.remove('visible');
+      section.classList.add('fade');
+    });
+
+    document.getElementById('intro').classList.remove('fade');
+    document.getElementById('intro').classList.add('visible');
+  }
+</script>
 
 </body>
 
 </html>
+
 
 
 
