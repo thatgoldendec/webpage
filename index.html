@@ -213,20 +213,24 @@
   }
 
   function goBack() {
+    // Hide all content sections
     ['certs', 'projects'].forEach(id => {
       const section = document.getElementById(id);
       section.classList.remove('visible');
       section.classList.add('fade');
     });
 
-    document.getElementById('intro').classList.remove('fade');
-    document.getElementById('intro').classList.add('visible');
+    // Show the intro section
+    const intro = document.getElementById('intro');
+    intro.classList.remove('fade');
+    intro.classList.add('visible');
   }
 </script>
 
 </body>
 
 </html>
+
 
 
 
